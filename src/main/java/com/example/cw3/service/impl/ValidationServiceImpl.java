@@ -1,8 +1,9 @@
-package com.example.cw3.service;
+package com.example.cw3.service.impl;
 
 import com.example.cw3.model.Color;
 import com.example.cw3.model.Size;
 import com.example.cw3.model.SocksBatch;
+import com.example.cw3.service.ValidationService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,12 +15,16 @@ public class ValidationServiceImpl implements ValidationService {
                 && socksBatch.getQuantity() != 0
                 && socksBatch.getSocks().getColor() != null
                 && socksBatch.getSocks().getSize() != null
-                && socksBatch.getSocks().getAmountCotton() >= 0 && socksBatch.getSocks().getAmountCotton() <= 100;
+                && checkCotton(socksBatch.getSocks().getAmountCotton(), socksBatch.getSocks().getAmountCotton());
     }
 
     @Override
-    public boolean validate(Color color, Size size, int amountCotton) {
-        return color != null && size != null && amountCotton >= 0 && amountCotton <= 100;
+    public boolean validate(Color color, Size size, int amountCottonMin, int amountCottonMax) {
+        return color != null && size != null && amountCottonMin >= 0 && amountCottonMax <= 100;
+    }
+
+    private boolean checkCotton(int cottonMin, int cottonMax) {
+        return cottonMin >= 0 && cottonMax <= 100;
     }
 
 }

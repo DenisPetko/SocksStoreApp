@@ -7,5 +7,5 @@ import com.example.cw3.model.SocksBatch;
 public interface ValidationService {
     public boolean validate(SocksBatch socksBatch);
 
-    public boolean validate(Color color, Size size, int amountCotton);
+    public boolean validate(Color color, Size size, int amountCottonMin, int amountCottonMax);
 }

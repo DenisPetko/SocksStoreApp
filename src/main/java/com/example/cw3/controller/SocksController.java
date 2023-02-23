@@ -1,4 +1,5 @@
 package com.example.cw3.controller;
+
 import com.example.cw3.model.Color;
 import com.example.cw3.model.Size;
 import com.example.cw3.model.SocksBatch;
@@ -23,7 +24,7 @@ public class SocksController {
     @ApiResponse(responseCode = "200", description = "Операция выполнена успешно")
     @ApiResponse(responseCode = "400", description = "параметры запроса отсутствуют или имеют некорректный формат")
     @ApiResponse(responseCode = "500", description = "произошла ошибка, не зависящая от вызывающей стороны")
-    public ResponseEntity<String> accept(@RequestParam SocksBatch socksBatch) {
+    public ResponseEntity<String> accept(@RequestBody SocksBatch socksBatch) {
         int socksCount = socksService.accept(socksBatch);
         return ResponseEntity.ok("Добавлено носков " + socksCount);
     }
@@ -33,7 +34,7 @@ public class SocksController {
     @ApiResponse(responseCode = "200", description = "Операция выполнена успешно")
     @ApiResponse(responseCode = "400", description = "параметры запроса отсутствуют или имеют некорректный формат")
     @ApiResponse(responseCode = "500", description = "произошла ошибка, не зависящая от вызывающей стороны")
-    public ResponseEntity<String> issuance(@RequestParam SocksBatch socksBatch) {
+    public ResponseEntity<String> issuance(@RequestBody SocksBatch socksBatch) {
         int socksCount = socksService.issuance(socksBatch);
         return ResponseEntity.ok("Отпущено носков " + socksCount);
     }
@@ -44,9 +45,10 @@ public class SocksController {
     @ApiResponse(responseCode = "400", description = "параметры запроса отсутствуют или имеют некорректный формат")
     @ApiResponse(responseCode = "500", description = "произошла ошибка, не зависящая от вызывающей стороны")
     public ResponseEntity<String> getCount(@RequestParam Color color,
-                                         @RequestParam Size size,
-                                         @RequestParam int amountCotton) {
-        int socksCount = socksService.getCount(color, size, amountCotton);
+                                           @RequestParam Size size,
+                                           @RequestParam int amountCottonMin,
+                                           @RequestParam int amountCottonMax) {
+        int socksCount = socksService.getCount(color, size, amountCottonMin, amountCottonMax);
         return ResponseEntity.ok("Запрошенных носков в наличии " + socksCount);
     }
 
@@ -55,7 +57,7 @@ public class SocksController {
     @ApiResponse(responseCode = "200", description = "Операция выполнена успешно")
     @ApiResponse(responseCode = "400", description = "параметры запроса отсутствуют или имеют некорректный формат")
     @ApiResponse(responseCode = "500", description = "произошла ошибка, не зависящая от вызывающей стороны")
-    public ResponseEntity<String> reject(@RequestParam SocksBatch socksBatch) {
+    public ResponseEntity<String> reject(@RequestBody SocksBatch socksBatch) {
         int socksCount = socksService.reject(socksBatch);
         return ResponseEntity.ok("Списано носков " + socksCount);
     }
