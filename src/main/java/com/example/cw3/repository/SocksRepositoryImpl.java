@@ -2,7 +2,6 @@ package com.example.cw3.repository;
 
 import com.example.cw3.model.Socks;
 import com.example.cw3.model.SocksBatch;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -52,7 +51,7 @@ public class SocksRepositoryImpl implements SocksRepository{
         for (Map.Entry<Socks, Integer> socksItem : socksMap.entrySet()) {
             socksBatchList.add(new SocksBatch(socksItem.getKey(), socksItem.getValue()));
         }
-        return null;
+        return socksBatchList;
     }
 
     @Override

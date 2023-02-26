@@ -34,7 +34,7 @@ public class FileController {
             InputStreamResource resource = new InputStreamResource(new FileInputStream(socksFile));
 
             return ResponseEntity.ok()
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .contentType(MediaType.APPLICATION_JSON)
                     .contentLength(socksFile.length())
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename " + socksFile.getName())
                     .body(resource);
@@ -44,7 +44,7 @@ public class FileController {
         }
     }
 
-    @GetMapping("/import")
+    @GetMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Загрузить файл")
     public ResponseEntity<String> uploadFile(@RequestParam MultipartFile file) {
         try {
