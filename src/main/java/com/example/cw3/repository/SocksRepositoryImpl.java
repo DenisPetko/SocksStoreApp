@@ -1,9 +1,7 @@
 package com.example.cw3.repository;
-
 import com.example.cw3.model.Socks;
 import com.example.cw3.model.SocksBatch;
 import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

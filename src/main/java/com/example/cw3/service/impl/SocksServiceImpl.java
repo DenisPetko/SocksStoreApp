@@ -1,5 +1,4 @@
 package com.example.cw3.service.impl;
-
 import com.example.cw3.exception.ValidationException;
 import com.example.cw3.model.Color;
 import com.example.cw3.model.Size;
@@ -13,7 +12,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -22,8 +20,6 @@ import java.util.Map;
 
 @Service
 public class SocksServiceImpl implements SocksService {
-    private final String dataFilePath;
-    private final String dataFileName;
     private final Path path;
     private final SocksRepository socksRepository;
     private final ValidationService validationService;
@@ -35,8 +31,6 @@ public class SocksServiceImpl implements SocksService {
         this.socksRepository = socksRepository;
         this.validationService = validationService;
         this.fileService = fileService;
-        this.dataFilePath = dataFilePath;
-        this.dataFileName = dataFileName;
         this.path = Path.of(dataFilePath, dataFileName);
     }
 
@@ -84,7 +78,7 @@ public class SocksServiceImpl implements SocksService {
 
     @Override
     public void importFromFile(MultipartFile file) throws IOException {
-        List<SocksBatch> socksBatchList = fileService.uploadFromFile(file, path, new TypeReference<List<SocksBatch>>() {
+        List<SocksBatch> socksBatchList = fileService.uploadFromFile(file, path, new TypeReference<>() {
         });
         socksRepository.replace(socksBatchList);
     }
